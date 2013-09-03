@@ -3,8 +3,7 @@ PHP Open Graph Library
 
 This is a very very simple PHP open graph parser.
 
-Pass it the contents of a web page, and it'll spit back an array containing
-an associated array of open graph tags and the value.
+Pass it the contents of a web page, and it'll spit back an associated array of open graph tags and the value.
 
 Usage
 -----
