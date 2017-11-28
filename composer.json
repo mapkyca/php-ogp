@@ -1,0 +1,17 @@
+{
+    "name": "mapkyca/php-ogp",
+    "description": "Simple PHP Open Graph Protocol parser library",
+    "license": "GPL2",
+    "keywords": ["opengraph"],
+    "authors": [
+	{
+	    "name": "Marcus Povey",
+	    "email": "marcus@marcus-povey.co.uk",
+	    "homepage": "https://www.marcus-povey.co.uk",
+	    "role": "Developer"
+	}
+    ],
+    "require": {
+        "php": ">=5.6.0"
+    }
+}
