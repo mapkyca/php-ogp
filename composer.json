@@ -1,7 +1,7 @@
 {
     "name": "mapkyca/php-ogp",
     "description": "Simple PHP Open Graph Protocol parser library",
-    "license": "GPL2",
+    "license": "GPL-2.0-only",
     "keywords": ["opengraph"],
     "authors": [
 	{
