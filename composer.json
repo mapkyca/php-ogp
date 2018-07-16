@@ -3,6 +3,13 @@
     "description": "Simple PHP Open Graph Protocol parser library",
     "license": "GPL-2.0-only",
     "keywords": ["opengraph"],
+    "autoload":
+    {
+        "psr-4":
+        {
+            "ogp\\": "ogp/"
+        }
+    },
     "authors": [
 	{
 	    "name": "Marcus Povey",
