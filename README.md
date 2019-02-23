@@ -21,6 +21,15 @@ Example:
 	print_r(\ogp\Parser::parse($content));
 ```
 
+Installation
+------------
+
+To install this in your project:
+
+```
+composer require mapkyca/php-ogp
+```
+
 Author
 ------
 
