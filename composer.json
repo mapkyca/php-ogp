@@ -14,7 +14,7 @@
     "require": {
         "php": ">=5.6.0"
     },
-	"autoload": {
+    "autoload": {
         "psr-4": {
             "mapkyca\\ogp": "ogp/"
         }
