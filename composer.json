@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "mapkyca\\ogp": "ogp/"
+            "ogp\\": "ogp/"
         }
     }
 }
