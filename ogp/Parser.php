@@ -85,6 +85,8 @@ namespace ogp {
                         }
                     }
                 }
+
+                $ogp = self::parseTwitterOEmbed($metas, $ogp);
             }
 
             // Basics
@@ -109,6 +111,66 @@ namespace ogp {
 
 	    return $ogp;
 	}
+
+    /**
+     * For Twitter API reference,
+     * see https://developer.twitter.com/en/docs/twitter-api/v1/tweets/post-and-engage/api-reference/get-statuses-oembed
+     */
+    private static function parseTwitterOEmbed(\DOMNodeList $metas, array $ogp): array
+    {
+        if (isset($ogp['oembed']['jsonp'])) {
+            return $ogp;
+        }
+
+        $canonicalLinks = array_filter(
+        // List link nodes
+            iterator_to_array($metas),
+            // Filter HTML link tags to preserve those having
+            // a "rel" attribute and a "canonical" value for this attribute
+            function ($meta) {
+                $canonicalLinks = array_filter(
+                    array_values(
+                    // List DOM attributes for each link node
+                        iterator_to_array($meta->attributes)
+                    ),
+                    // Expect to find an attribute having
+                    // - "rel" name and
+                    // - "canonical" value
+                    function ($attr) {
+                        return $attr->name === 'rel' && $attr->value === 'canonical';
+                    }
+                );
+
+                return count($canonicalLinks) > 0;
+            }
+        );
+
+        if (count($canonicalLinks) >= 1) {
+            // Reorder list from zero index
+            /** @var \DOMNode[] $links */
+            $links              = array_values($canonicalLinks);
+            $firstCanonicalLink = $links[0]->getAttribute('href');
+
+            if (
+                !empty(trim($firstCanonicalLink))
+                && preg_match('#^https://(www\.|mobile\.)?twitter\.com#i', $firstCanonicalLink) === 1
+            ) {
+                $ogp['oembed'] = [
+                    'jsonp' => [
+                        implode(
+                            [
+                                'https://publish.twitter.com/oembed?url=',
+                                $firstCanonicalLink,
+                                '&align=center'
+                            ]
+                        )
+                    ]
+                ];
+            }
+        }
+
+        return $ogp;
+    }
 
     }
 
